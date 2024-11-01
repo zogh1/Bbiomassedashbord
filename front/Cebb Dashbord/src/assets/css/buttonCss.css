@@ -1,0 +1,92 @@
+.custom-btn {
+
+
+    background-color: #ad1641;
+    color : white;
+    border : none;
+}
+
+.custom-btn:disabled {
+    background-color: #ccc; /* Gray to indicate it's disabled */
+    color: #666;           /* Lighter text to match the disabled state */
+    cursor: not-allowed;    /* Change the cursor to indicate it's not clickable */
+    opacity: 0.6;           /* Make it slightly transparent */
+}
+
+.custom-btn:hover {
+    background-color: #900e35; 
+    color: white;
+}
+
+
+.custom-btn-outline {
+    background-color: transparent;
+    color: #ad1641;
+    border: 2px solid #ad1641;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.custom-btn-outline:hover {
+    background-color: #ad1641; 
+    color: white;
+    border-color: #ad1641;
+}
+
+
+
+.custom-btn-2 {
+
+
+    background-color: #887993;
+    color : white;
+    border : none;
+}
+
+.custom-btn-2:hover {
+    background-color: #6f617a; 
+    color: white;
+}
+
+
+.pag-active{
+
+    background-color: #ad1641;
+    color : white;
+    border : none;
+}
+
+.pag-notactive{
+
+    background-color: #887993;
+    color : white;
+    border : none;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    background-color: #ad1641;
+    color : white;
+    border : none;
+}
+
+#customCheckLogin:checked + .custom-control-label::before {
+    background-color: #ad1641;
+    border-color: #ad1641;
+  }
+
+
+  #customCheckRegister:checked + .custom-control-label::before {
+    background-color: #ad1641;
+    border-color: #ad1641;
+  }
+
+  Input{
+
+    color: black;
+  }
+
+  .bg-default {
+    background-color: #172b4d !important;
+    /*    background-color: #4e658e !important;*/
+
+  }

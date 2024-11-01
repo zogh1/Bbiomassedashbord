@@ -1,0 +1,53 @@
+version: '3.8'  # Specify the version of the Compose file format
+
+services:
+  
+  node:
+    build:
+      context: backend
+    ports:
+      - 5000:5000
+    networks:
+      - mongo-node-network
+    environment:
+      - DB_HOSTNAME=mongo
+      - MONGO_URI=mongodb://mongo:27017/biomasse-dashboard  # Use MongoDB service name
+    stdin_open: true  # Enable interactive mode
+    tty: true         # Allocate a pseudo-TTY
+    depends_on:
+      - mongo  # Ensure MongoDB starts before Node.js
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    networks:
+      - mongo-node-network
+    volumes:
+      - mongo-volume:/data/db
+    stdin_open: true  # Enable interactive mode
+    tty: true         # Allocate a pseudo-TTY
+  
+
+  frontend:
+    build:
+      context: ./front/Cebb Dashbord
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./front/Cebb Dashbord/src:/app/src
+    stdin_open: true  # Enable interactive mode
+    tty: true         # Allocate a pseudo-TTY
+    depends_on:
+      - node  # Ensure Node.js starts before the frontend
+    networks:
+      - mongo-node-network
+
+networks:
+  mongo-node-network:
+    name: mongo-node-network
+
+volumes:
+  mongo-volume:
+    name: mongo-volume
