@@ -15,7 +15,7 @@ pipeline {
         stage('Build Docker Image (Back)') {
             steps {
                 script {
-                    bat"cd backend"
+                   
                     def dockerImage=docker.build("zoghlami19/devops-node:latest","-f backend/Dockerfile .")
                 }
             }
@@ -25,7 +25,7 @@ pipeline {
         stage('Build Docker Image (Front)') {
             steps {
                 script {
-                     bat"cd front/Cebb Dashbord"
+                    
                     def dockerImage=docker.build("zoghlami19/devops-frontend:latest","-f front/Cebb Dashbord/Dockerfile .")
                 }
             }
