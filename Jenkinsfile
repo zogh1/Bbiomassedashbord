@@ -15,7 +15,7 @@ pipeline {
         stage('Build Docker Image (Back)') {
             steps {
                 script {
-                    sh 'sudo chmod 666 /var/run/docker.sock'
+                    
                     def dockerImage=docker.build("zoghlami19/devops-node:latest")
                 }
             }
@@ -24,7 +24,7 @@ pipeline {
         stage('Build Docker Image (Front)') {
             steps {
                 script {
-                    sh 'sudo chmod 666 /var/run/docker.sock'
+                   
                     def dockerImage=docker.build("zoghlami19/devops-frontend:latest")
                 }
             }
