@@ -198,9 +198,8 @@ exports.validateResetPassword = [
     body('token').notEmpty().withMessage('Le token est requis'),
     body('newPassword').isLength({ min: 6 }).withMessage('Le nouveau mot de passe doit contenir au moins 6 caractères')
 ];
-
 exports.registerUser = async (req, res) => {
-    console.log('Incoming request body:', req.body); // Log request body to see the incoming data
+    console.log('Incoming request body:', req.body);
     const { name, email, password, role, organization, position, phone, location, specialization } = req.body;
 
     const errors = validationResult(req);
@@ -210,47 +209,46 @@ exports.registerUser = async (req, res) => {
     }
 
     const validRoles = ['User', 'Chercheur', 'Décideurs politiques', 'Agriculteurs'];
-    console.log('Role received:', role); // Log the role to check what was sent
     if (!validRoles.includes(role)) {
-        console.log('Invalid role:', role); // Log if the role is invalid
         return res.status(400).json({ msg: 'Invalid role provided' });
     }
 
     try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'User already exists.' });
+        }
+
         const verificationToken = crypto.randomBytes(20).toString('hex');
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        console.log('Creating new user:', email); // Log the email of the user being created
         const newUser = new User({
-            name: name || '', 
-            email: email || '', 
+            name,
+            email,
             password: hashedPassword,
-            role: role || 'User', 
-            verified: false, 
-            verificationToken: verificationToken, 
-            resetPasswordToken: '', 
-            resetPasswordExpires: null, 
-            twoFactorSecret: '', 
-            organization: organization || '', 
-            position: position || '', 
-            phone: phone || '', 
-            location: location || '', 
-            specialization: specialization || '', 
-            projects: [],
+            role,
+            verified: false,
+            verificationToken,
+            organization,
+            position,
+            phone,
+            location,
+            specialization,
             status: 'active'
         });
 
         await newUser.save();
-        console.log('User created, sending verification email to:', email);
         await sendVerificationEmail(email, verificationToken);
 
-        res.json({ msg: 'User registered. Please check your email for verification.', role: newUser.role });
+        return res.status(201).json({ msg: 'User registered. Please check your email for verification.' });
     } catch (err) {
         console.error('Error during user registration:', err.message);
-        res.status(500).send('Server Error');
+        return res.status(500).send('Server Error');
     }
 };
+
+
 
 // Check if email exists
 exports.checkEmail = async (req, res) => {
