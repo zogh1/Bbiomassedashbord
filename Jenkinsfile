@@ -6,7 +6,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Checkout the code from GitHub
-                git  branch: 'main', url: 'https://github.com/zogh1/BiomassFinaleApp.git', credentialsId: 'git-cred'
+                git  branch: 'main', url: 'https://github.com/zogh1/biomassedashbord_wassim.git', credentialsId: 'git-cred'
             }
         }
         
