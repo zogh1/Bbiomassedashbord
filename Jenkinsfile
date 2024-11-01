@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                    
-                    def dockerImage=docker.build("zoghlami19/devops-node:latest","-f backend/Dockerfile .")
+                    def dockerImage=docker.build("zoghlami19/devops-node:latest","-f backend/Dockerfile backend")
                 }
             }
         }
