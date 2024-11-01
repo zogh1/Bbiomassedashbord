@@ -36,7 +36,7 @@ pipeline {
                 script {
                     withCredentials([string(credentialsId: 'docker-cred', variable: 'dockerpwd')]) {
                         bat '''
-                        docker login -u zoghlami19 -p "$dockerpwd"
+                       
                         docker push zoghlami19/devops-node:latest
                         docker push zoghlami19/devops-frontend:latest
                         '''
