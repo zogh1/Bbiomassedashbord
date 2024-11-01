@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                      bat"cd front/Cebb Dashbord"
-                    def dockerImage=docker.build("zoghlami19/devops-frontend:latest")
+                    def dockerImage=docker.build("zoghlami19/devops-frontend:latest","-f front/Cebb Dashbord/Dockerfile .")
                 }
             }
         }
