@@ -3,8 +3,7 @@ version: '3.8'  # Specify the version of the Compose file format
 services:
   
   node:
-    build:
-      context: backend
+    images: zoghlami19/devops-node
     ports:
       - 5000:5000
     networks:
