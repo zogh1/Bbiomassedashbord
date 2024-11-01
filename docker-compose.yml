@@ -4,6 +4,7 @@ services:
   
   node:
     images: zoghlami19/devops-node
+    build: backend
     ports:
       - 5000:5000
     networks:
@@ -30,6 +31,7 @@ services:
 
   frontend:
     image: zoghlami19/devops-frontend:latest
+    build: ./front/Cebb Dashbord
     ports:
       - 3000:3000
     volumes:
