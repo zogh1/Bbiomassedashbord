@@ -34,17 +34,15 @@ pipeline {
          stage('Push Docker Image to DockerHub') {
             steps {
                 script {
-                     docker.withRegistry('https://index.docker.io/v1/', 'docker-cred') {
-                       docker.image("zoghlami19/devops-frontend:latest").push()
-                         docker.image("zoghlami19/devops-node:latest").push()
-            }
-                    // withCredentials([string(credentialsId: 'docker-cred', variable: 'dockerpwd')]) {
-                    //     bat '''
-                       
-                    //     docker push zoghlami19/devops-node:latest
-                    //     docker push zoghlami19/devops-frontend:latest
-                    //     '''
-                    // }
+                  
+                    withCredentials([string(credentialsId: 'docker-cred', variable: 'dockerpwd')]) {
+                        bat '''
+                        docker login -u zoghlami19 -p dckr_pat_3TuStXc_EYKdsB8vvv5WMvFo3Ug
+
+                        docker push zoghlami19/devops-node:latest
+                        docker push zoghlami19/devops-frontend:latest
+                        '''
+                    }
                 }
             }
         }
