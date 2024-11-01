@@ -4,14 +4,15 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
+
 RUN npm install
+COPY . .
 
 # Run tests
 RUN npm test
 
 
 
-COPY . .
 
 EXPOSE 5000
 
