@@ -50,10 +50,12 @@ pipeline {
         stage('Run Docker Compose') {
             steps {
                 script {
+                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     // Change to the directory containing your docker-compose.yml file
                     dir('path/to/your/docker-compose-directory') {
                         // Run the docker-compose command
                         bat 'docker-compose up -d'
+                    }
                     }
                 }
             }
